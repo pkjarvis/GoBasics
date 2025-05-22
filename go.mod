@@ -1,5 +1,5 @@
 module example/hello
 
-go 1.16
+go 1.24.2
 
-require rsc.io/quote v1.5.2 // indirect
+require golang.org/x/tour v0.1.0 // indirect

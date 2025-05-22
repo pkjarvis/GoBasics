@@ -36,6 +36,20 @@ func split(sum int)(x,y int){
 	return
 }
 
+// Numeric constants
+const (
+	// Create a huge number by shifting a 1 bit left 100 places.
+	// In other words, the binary number that is 1 followed by 100 zeroes.
+	Big = 1 << 100
+	// Shift it right again 99 places, so we end up with 1<<1, or 2.
+	Small = Big >> 99
+)
+
+func needInt(x int) int { return x*10 + 1 }
+func needFloat(x float64) float64 {
+	return x * 0.1
+}
+
 
 
 func main(){
@@ -147,7 +161,7 @@ func main(){
 // 	%v	Default format (any value)
 // %t	Boolean
 // %#v	Go-syntax representation
-// %T	Type of value
+// %T	Type of value 
 
 
 	fmt.Printf("Type: %T Value: %v\n",ToBe,ToBe)
@@ -191,8 +205,25 @@ fmt.Println(p,q,r)
 
 
 
+// Type conversion 
+var x, y int = 3, 4
+var fx float64 = math.Sqrt(float64(x*x + y*y))
+var z uint = uint(fx)
+fmt.Println(x, y, z)
+
+// BAsic data types -> int,float,complex,bool,string
+// Aggregate types -> array,slice(dynamic array),struct
+// Referance types -> pointer,map,function,interface,channel
 
 
+// Type inference -> when data types is not defined then data type would be according to right hand side value
+g:=2+3i
+fmt.Println(g)
+
+
+fmt.Println(needInt(Small))
+fmt.Println(needFloat(Small))
+fmt.Println(needFloat(Big))
 
 
 
