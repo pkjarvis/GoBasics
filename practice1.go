@@ -58,6 +58,39 @@ func printSlice(s []int){
 var pow2=[]int{1,2,4,8,16,32,64,128}
 
 
+
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+// closure ->  A closure is a function value that references variables from outside its body. 
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+
+
+type VertexV struct{
+	X,Y float64
+}
+
+func (v VertexV) Abs() float64{
+	return Math.Sqrt(v.X*v.X+v.Y*v.Y)
+}
+
+type MyFloat float64
+func (f MyFloat) Abs() float64{
+	if f<0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+
 func main() {
 	sum := 0
 	for i := 0; i < 10; i++ {
@@ -329,6 +362,33 @@ func main() {
 	ny:=map[string]int{"foo":1,"bar":2}
 	fmt.Println("map",ny)
 
+
+	hypot:=func(x,y float64) float64{
+		return math.Sqrt(x*x+y*y)
+	}
+
+	fmt.Println("Sqrt of num x,y is:",hypot(5,12))
+	fmt.Println("Compute value is:",compute(hypot))
+	fmt.Println("Power is:",compute(math.Pow))
+
+	pos,neg:=adder(),adder()
+	for i:=0;i<10;i++ {
+		fmt.Println(pos(i),neg(-2*i))
+	}
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
 
 
 

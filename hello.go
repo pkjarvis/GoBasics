@@ -1,28 +1,26 @@
-// Package is a way to group functions and it's made up of all the files in the same directory
 package main
 
-// importing fmt package  which contains  functions for formatting text, including printing to the console
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Vertex struct {
-	Lat, Long float64
+	X, Y float64
 }
 
-var m = map[string]Vertex{
-	"Bell Labs": Vertex{
-		40.68433, -74.39967,
-	},
-	"Google": Vertex{
-		37.42202, -122.08408,
-	},
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
 }
 
-
-
-func main(){
-	fmt.Println("hello world")
-	fmt.Println(m)
+func (v *Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
-
-
+func main() {
+	v := &Vertex{3, 4}
+	fmt.Printf("Before scaling: %+v, Abs: %v\n", v, v.Abs())
+	v.Scale(5)
+	fmt.Printf("After scaling: %+v, Abs: %v\n", v, v.Abs())
+}
