@@ -91,6 +91,77 @@ func (f MyFloat) Abs() float64{
 }
 
 
+
+// Define a struct type
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+
+// Area is a method associated with the Rectangle type.
+// It has a value receiver `r Rectangle`.
+// This means the method operates on a COPY of the Rectangle value.
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// Perimeter is another method for Rectangle.
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+
+
+import "fmt"
+import "math"
+
+// Define an interface called 'Shape'
+// Any type that has both an Area() and a Perimeter() method (with matching signatures)
+// automatically satisfies the Shape interface.
+type Shape interface {
+	Area() float64
+	Perimeter() float64
+}
+
+// Rectangle type (from previous example)
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+
+// Area method for Rectangle (value receiver)
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// Perimeter method for Rectangle (value receiver)
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+// Circle type
+type Circle struct {
+	Radius float64
+}
+
+// Area method for Circle (value receiver)
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
+}
+
+// Perimeter method for Circle (value receiver - for a circle, this is circumference)
+func (c Circle) Perimeter() float64 {
+	return 2 * math.Pi * c.Radius
+}
+
+// PrintShapeInfo is a function that takes an argument of type 'Shape'.
+// It can accept any type that implements the Shape interface.
+func PrintShapeInfo(s Shape) {
+	fmt.Printf("Area: %.2f, Perimeter: %.2f\n", s.Area(), s.Perimeter())
+}
+
+
+
 func main() {
 	sum := 0
 	for i := 0; i < 10; i++ {
@@ -374,7 +445,37 @@ func main() {
 	pos,neg:=adder(),adder()
 	for i:=0;i<10;i++ {
 		fmt.Println(pos(i),neg(-2*i))
+
 	}
+
+
+	//  Method syntax
+	func (receiverName ReceiverType) MethodName(parameters) (returnValues) {
+    // Method body
+    }
+
+	// Interfaces in go
+	// An interface defines a set of method signatures. It specifies what a type can do, not how it does it
+	rect := Rectangle{Width: 10, Height: 5}
+	circ := Circle{Radius: 7}
+
+	// Both Rectangle and Circle satisfy the Shape interface
+	// because they both have Area() and Perimeter() methods.
+	PrintShapeInfo(rect) // Output: Area: 50.00, Perimeter: 30.00
+	PrintShapeInfo(circ) // Output: Area: 153.94, Perimeter: 43.98
+
+	// You can also declare interface variables directly
+	var s1 Shape = rect
+	var s2 Shape = circ
+	fmt.Println("Using interface variables:")
+	PrintShapeInfo(s1)
+	PrintShapeInfo(s2)
+
+	
+
+	
+
+	
 
 	
 
